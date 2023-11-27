@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Members Page{% endblock title %}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  
+
+  .main {
+    width: 100%;
+   /* margin-left: 21%;  Same width as the sidebar + left position in px */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 300px;
+    margin-top: 80px;
+    margin-bottom: 900px; 
+  }
+
+  div.gallery {
+    border: 1px solid #ccc;
+  }
+  
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  div.gallery img {
+    width: 100%;
+    height: auto;
+  }
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+    margin-top: 10px;
+  }
+  
+  .main input{
+    width: 250px;
+    height: 40px;
+    margin-left: 6px;
+    font-size: 15px;
+    border-radius: 5px;
+  }
+  .main button{
+    font-size: 18px;
+    padding: 4px 12px;
+    border-radius: 5px;
+  }
+  .main button:hover{
+    background-color: #1c65a0;
+    color: #eee;
+  }
+
+
+  @media only screen and (max-width: 700px) {
+    .responsive {
+      width: 49.99999%;
+      margin: 6px 0;
+    }
+   
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .responsive {
+      width: 75%;
+      margin-left: 20%;
+    }
+  
+    .main input{
+      width: 180px;
+      height: 40px;
+      margin-left: 79px;
+      font-size: 15px;
+      border-radius: 5px;
+    }
+    .main button{
+      font-size: 18px;
+      padding: 4px 12px;
+      border-radius: 5px;
+    }
+    
+  }
+
+  @media screen and (max-width:473px){
+    .main input{
+      width: 200px;
+      height: 40px;
+      margin-left: 79px;
+      font-size: 15px;
+      border-radius: 5px;
+    }
+    .main button{
+      width: 200px;
+      margin-left: 79px;
+      font-size: 18px;
+      padding: 4px 12px;
+      border-radius: 5px;
+    }
+  }
+  
+  
+</style>
+
+
+
+
+
+<div class="main" >
+  <form>
+    <input type="search" name="search" id="">
+    <button type="submit">Search</button>
+  </form>
+
+  {% for n in memberData %}
+  <div class="responsive" >
+    <div class="gallery">
+      <img src="{{n.member_image.url}}" alt="" style="height: 250px;">
+
+      <div class="desc" style="height: 300px;">
+        <h3>Name: {{n.mem_name}}</h3>
+        <h4 style="font-weight: 200;">Student Id: {{n.std_id}}</h4>
+        <h4 style="font-weight: 200;">Club: {{n.club}}</h4>
+        <h4 style="font-weight: 200;">Position: {{n.position}}</h4>
+        <h4 style="font-weight: 200;">Joining Date: {{n.join_date}}</h4>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <div class="alert" style="background-color: rgb(227, 27, 27); margin:50px 0; width:80%; color:#fbfbfb">
+      <strong><h2>No Members Found <br> <h3>Please Insert Valid Name</h3> </h2></strong>
+    </div>
+  
+  {% endfor %}
+  
+  
+ 
+
+</div>  
+
+
+{% endblock content %}

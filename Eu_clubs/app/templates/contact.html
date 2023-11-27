@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}Contact Page{% endblock title %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+        color: white;
+      }
+      
+      input[type=text],
+      [type=email],
+      [type=password] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+      }
+      
+      input[type=submit] {
+        margin: 40px auto 10px auto;
+        display: block;
+        background-color: whitesmoke;
+        color: black;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      input[type=submit]:hover {
+        background-color: green;
+        color: white;
+      }
+      
+      .container {
+        border-radius: 4px;
+        background-color: #00bc4b;
+        padding: 20px;
+        width: 55%;
+        margin: auto;
+      }
+      
+      .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+      }
+      
+      .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+      }
+      
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      
+      /* make it responsive */
+      @media screen and (max-width: 600px) {
+      
+        .col-25,
+        .col-75,
+        input[type=submit] {
+          width: 100%;
+          margin-top: 0;
+        }
+      
+        input[type=submit] {
+          margin-top: 30px;
+      
+        }
+      
+        .container {
+          width: 100%;
+        }
+      
+      }
+      
+      @media screen and (min-width: 601px) and (max-width: 900px) {
+        .container {
+          width: 80%;
+        }
+      }
+</style>
+
+<h1 style="text-align: center; margin-top:100px;">Contact Us</h1>
+
+<div class="container">
+    {% if msg %}
+    <h2 style="text-align: center; margin-top:100px;">{{msg}}</h2>
+    {% endif %}
+
+    <form action="{% url 'contactpage' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Full Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="name" placeholder="Enter Your Full Name" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Student Id</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="std_id" placeholder="Enter Your Student Id" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Email</label>
+            </div>
+            <div class="col-75">
+                <input type="email" name="email" placeholder="Enter Your Email" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Message</label>
+            </div>
+            <div class="col-75">
+                <textarea style="border-radius: 4px; width: 100%; border: 1px solid #ccc;" name="message" id="" cols="78" rows="10" placeholder="If you face any problem, please write here ...."
+                    required></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" name="save" value="Click Here !!">
+        </div>
+
+    </form>
+</div>
+
+
+
+
+
+
+{% endblock content %}

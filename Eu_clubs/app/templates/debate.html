@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% block title %}Debate Club Page{% endblock title %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    .clubs {
+        display: flex;
+    }
+
+    .news .gallery-container {
+        max-width: 70%;
+        margin-top: 100px;
+        margin-left: 20px;
+        overflow: hidden;
+    }
+
+    .news .gallery {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .news .gallery-item {
+        width: 50%;
+        /* Display two items at a time */
+        flex: 0 0 auto;
+        margin-right: 20px;
+
+    }
+
+    .news img {
+        width: 100%;
+        height: 300px;
+    }
+
+
+    .notic{
+        max-width: 30%;
+        margin-top: 100px;
+        margin-right: 20px;
+        display: flex;
+    }
+    .notic .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        margin-left: 5px;
+        width: 200px;
+    }
+
+    .notic .drop {
+        position: relative;
+        display: inline-block;
+        
+        
+    }
+
+    .notic .content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 300px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        padding: 30px;
+    }
+
+
+    .notic .drop:hover .content {
+        display: block;
+    }
+
+    .notic .drop:hover .btn {
+        background-color: #3e8e41;
+    }
+
+ 
+
+    .container{
+        margin-top: 100px;
+        margin-right: 100px;
+        display: flex;
+        margin-left: 20px;
+    }
+    .reg a{
+       
+        text-align: center;
+        text-decoration: none;
+        background-color: #3e8e41;
+        padding: 10px 20px;
+        color: #f1f1f1;
+
+    }
+    .member a{
+        
+        text-align: center;
+        text-decoration: none;
+        background-color: #3e8e41;
+        padding: 10px 20px;
+        margin-left: 5px;
+        color: #f1f1f1;
+
+    }
+    
+    /* Responsive layout adjustments */
+    @media screen and (max-width: 900px) {
+        .news .gallery-item {
+            width: 100%;
+            /* Display one item at a time on smaller screens */
+        }
+        .clubs{
+            flex-direction: column;
+            margin-bottom: 500px;
+        }
+        .notic .drop{
+            width: 100%;
+            height: auto;
+            
+        }
+        .notic .drop:last-child {
+            
+            margin-left: 60px;
+        }
+
+    
+    }
+
+
+</style>
+
+
+<h1 style="text-align: center;">Welcome to Eastern University debate club.</h1>
+
+<div class="container">
+    <div class="reg">
+        <a href="{% url 'signuppage' %}" >Register</a>
+    </div>
+    <div class="member">
+        <a href="{% url 'memberpage' %}" >Show Members</a>
+    </div>
+</div>
+
+
+
+<section class="clubs">
+    
+
+    <div class="news">
+        <div class="gallery-container">
+            <div class="gallery">
+                <div class="gallery-item"><img src="{% static 'images/1.jpg' %}" alt="Image 1">fhgdsdfsfshgd</div>
+                <div class="gallery-item"><img src="{% static 'images/3.jpg' %}" alt="Image 3">fghdfgsdgdsdg</div>
+                <div class="gallery-item"><img src="{% static 'images/2.jpg' %}" alt="Image 2">gddgsdgsdgsdgdd</div>
+                <div class="gallery-item"><img src="{% static 'images/1.jpg' %}" alt="Image 1">dfgdfdgdfgdsg</div>
+                <div class="gallery-item"><img src="{% static 'images/3.jpg' %}" alt="Image 3">ddgdfgdgdfgdgd</div>
+                <!-- Add more images as needed -->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="notic">
+
+        <div class="drop" >
+            <button class="btn">Clubs Rules</button>
+            <div class="content">
+                <h2>Rules:</h2>
+                <p>1.All the General members are bound to abide by all the rules of EUCC</p>
+                <p>2.They have to maintain club’s regulation</p>
+                <p>3.They are requested to attend all the events</p>
+                <p>4.They have to volunteer in all the events if asked by the event’s coordinator </p>
+                <p>5.All the members must attend the general meeting </p>
+                <p>6.Regestration fee or development fee-100Tk.</p>
+            </div>
+        </div>
+        <div class="drop" >
+            <button class="btn">Upcoming Evnets</button>
+            <div class="content" style="width: 300px; ">
+                <img src="{% static 'images/1.jpg' %}" alt="" style="width: 100%; height:150px;">
+                <p>There is no upcoming event.</p>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+</section>
+
+
+<script>
+    const gallery = document.querySelector('.gallery');
+    let currentIndex = 0;
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 2) % gallery.children.length;
+        updateGallery();
+    }
+
+    function updateGallery() {
+        const translateValue = -currentIndex * 50 + '%';
+        gallery.style.transform = 'translateX(' + translateValue + ')';
+    }
+
+    // Change slide every 3 seconds
+    setInterval(nextSlide, 3000);
+</script>
+
+{% endblock content %}
